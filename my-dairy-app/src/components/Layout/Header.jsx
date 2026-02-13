@@ -10,7 +10,7 @@ export default function Header({ settings, isDarkMode, toggleTheme, setView }) {
             <Droplets className="w-5 h-5 text-blue-200" /> {settings.dairyName}
           </h1>
           <p className="text-blue-100 text-[10px] opacity-80 uppercase tracking-widest mt-0.5">
-            RV
+            Ri$hi
           </p>
         </div>
         <div className="flex items-center gap-2">
