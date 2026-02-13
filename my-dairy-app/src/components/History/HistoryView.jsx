@@ -2,6 +2,7 @@ import React from "react";
 import { ClipboardList } from "lucide-react";
 import HistoryCard from "./HistoryCard";
 
+
 export default function HistoryView({
   entries,
   settings,
@@ -11,6 +12,7 @@ export default function HistoryView({
   const sorted = [...entries].sort((a, b) => b.timestamp - a.timestamp);
 
   return (
+    
     <div className="space-y-4">
       <h2
         className={`text-lg font-bold px-2 flex items-center gap-2 ${isDarkMode ? "text-white" : "text-slate-800"}`}
