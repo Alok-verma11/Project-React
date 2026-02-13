@@ -91,6 +91,14 @@ export default function App() {
     }
   };
 
+//  for update vendor details
+  const updateVendor = (id, updatedName, updatedPhone) => {
+    const updated = vendors.map((v) =>
+      v.id === id ? { ...v, name: updatedName, phone: updatedPhone } : v,
+    );
+    setVendors(updated);
+    localStorage.setItem("dairy-vendors", JSON.stringify(updated));
+  };
 
   return (
     <div
@@ -124,6 +132,7 @@ export default function App() {
             vendors={vendors}
             onAdd={addVendor}
             onDeleteVendor={deleteVendor}
+            onUpdateVendor={updateVendor}
             isDarkMode={isDarkMode}
             onSelectVendor={(id) => {
               setSelectedVendorId(id);
