@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Users, UserPlus, ChevronRight } from "lucide-react";
+import { Users, UserPlus, ChevronRight, Trash2 } from "lucide-react";
 
 export default function VendorList({
   vendors,
   onAdd,
+  onDeleteVendor,
   isDarkMode,
   onSelectVendor,
 }) {
@@ -22,7 +23,8 @@ export default function VendorList({
     <div className="space-y-4">
       <div className="flex justify-between items-center px-2">
         <h2 className="text-lg font-bold flex items-center gap-2">
-          <Users className="w-5 h-5 text-blue-600" />Vendors
+          <Users className="w-5 h-5 text-blue-600" />
+          Vendors
         </h2>
         <button
           onClick={() => setShowAdd(!showAdd)}
@@ -76,7 +78,18 @@ export default function VendorList({
                 <p className="text-xs opacity-50">{v.phone || "No phone"}</p>
               </div>
             </div>
-            <ChevronRight className="w-5 h-5 opacity-30" />
+            <div className="flex items-center gap-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevents opening the vendor detail
+                  onDeleteVendor(v.id);
+                }}
+                className="p-2 text-slate-300 hover:text-red-500 transition-colors"
+              >
+                <Trash2 className="w-4 h-4" />
+              </button>
+              <ChevronRight className="w-5 h-5 opacity-30" />
+            </div>
           </div>
         ))}
       </div>

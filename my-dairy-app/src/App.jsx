@@ -72,6 +72,26 @@ export default function App() {
     localStorage.setItem("dairy-theme", newVal ? "dark" : "light");
   };
 
+// delete vender function
+  const deleteVendor = (id) => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this vendor? All their history will remain, but the vendor profile will be gone.",
+      )
+    ) {
+      const updated = vendors.filter((v) => v.id !== id);
+      setVendors(updated);
+      localStorage.setItem("dairy-vendors", JSON.stringify(updated));
+
+      // Optional: If you are currently viewing the deleted vendor, go back to the list
+      if (selectedVendorId === id) {
+        setView("vendors");
+        setSelectedVendorId(null);
+      }
+    }
+  };
+
+
   return (
     <div
       className={`max-w-md mx-auto min-h-screen transition-colors duration-300 pb-24 font-sans ${isDarkMode ? "dark bg-slate-900 text-slate-100" : "bg-slate-50 text-slate-900"}`}
@@ -103,6 +123,7 @@ export default function App() {
           <VendorList
             vendors={vendors}
             onAdd={addVendor}
+            onDeleteVendor={deleteVendor}
             isDarkMode={isDarkMode}
             onSelectVendor={(id) => {
               setSelectedVendorId(id);

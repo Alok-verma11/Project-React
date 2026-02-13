@@ -28,7 +28,7 @@ export default function Navigation({ view, setView, isDarkMode }) {
         active={view === "history"}
         onClick={() => setView("history")}
         icon={History}
-        label="Logs"
+        label="history"
       />
       <NavBtn
         active={view === "vendors" || view === "vendor-detail"}
