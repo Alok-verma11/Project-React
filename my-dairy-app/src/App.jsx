@@ -83,7 +83,6 @@ export default function App() {
       setVendors(updated);
       localStorage.setItem("dairy-vendors", JSON.stringify(updated));
 
-      // Optional: If you are currently viewing the deleted vendor, go back to the list
       if (selectedVendorId === id) {
         setView("vendors");
         setSelectedVendorId(null);
@@ -92,13 +91,25 @@ export default function App() {
   };
 
 //  for update vendor details
-  const updateVendor = (id, updatedName, updatedPhone) => {
-    const updated = vendors.map((v) =>
-      v.id === id ? { ...v, name: updatedName, phone: updatedPhone } : v,
-    );
-    setVendors(updated);
-    localStorage.setItem("dairy-vendors", JSON.stringify(updated));
-  };
+const updateVendor = (id, updatedName, updatedPhone) => {
+  // 1. Update the Vendor List
+  const updatedVendors = vendors.map((v) =>
+    v.id === id ? { ...v, name: updatedName, phone: updatedPhone } : v,
+  );
+
+  // 2. Update all History Logs where this vendor appears
+  const updatedEntries = entries.map((entry) =>
+    entry.vendorId === id ? { ...entry, vendorName: updatedName } : entry,
+  );
+
+  // 3. Update States
+  setVendors(updatedVendors);
+  setEntries(updatedEntries);
+
+  // 4. Sync to LocalStorage
+  localStorage.setItem("dairy-vendors", JSON.stringify(updatedVendors));
+  localStorage.setItem("dairy-entries", JSON.stringify(updatedEntries));
+};
 
   return (
     <div
